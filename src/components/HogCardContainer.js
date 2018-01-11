@@ -5,9 +5,9 @@ class HogCardContainer extends React.Component {
   constructor() {
     super();
 
-  this.state = {
-    showView: false,
-  }
+    this.state = {
+      showView: false,
+    }
 }
 
 handleClick = () => {

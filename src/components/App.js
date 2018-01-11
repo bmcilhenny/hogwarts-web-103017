@@ -14,27 +14,9 @@ class App extends Component {
     hogs: hogs,
     greased: false,
     filter: 'All',
-    filteredHogs: hogs
+    filteredHogs: []
   }
 }
-//
-handleGreasedFilter = () => {
-  console.log('hey')
-  this.setState({
-    greased: !this.state.greased,
-  }, () => this.sortHogs())
-}
-//
-// greasedHogs = () => {
-//   if (this.state.greased) {
-//     this.setState({
-//       filteredHogs: this.state.filteredHogs.filter(hog => hog.greased === true)
-//     }, () => console.log(this.state.filteredHogs))
-//   } else {
-//     console.log(this.state.filteredHogs)
-//   }
-// }
-
 
 sortHogsByWeight = () => {
   const sortedByWeight = [...this.state.hogs];
@@ -65,22 +47,15 @@ sortHogsByName = () => {
 
 sortHogs = () => {
   let sortedHogs = this.state.hogs
-  if (this.state.filter === 'All') {
-    if (this.state.greased) {
-      sortedHogs = sortedHogs.filter(hog => hog.greased === true)
-    }
-  } else if (this.state.filter === 'Name') {
-    if (this.state.greased) {
-      sortedHogs = this.sortHogsByName().filter(hog => hog.greased === true)
-    } else {
+
+  if (this.state.filter === 'Name') {
       sortedHogs = this.sortHogsByName()
-    }
-  } else if (this.state.filter === 'Weight') {
-    if (this.state.greased) {
-      sortedHogs = this.sortHogsByWeight().filter(hog => hog.greased === true)
-    } else {
+    } else if (this.state.filter === 'Weight') {
       sortedHogs = this.sortHogsByWeight()
-    }
+  }
+
+  if (this.state.greased) {
+    sortedHogs = sortedHogs.filter(hog => hog.greased === true)
   }
 
   this.setState({
@@ -88,6 +63,12 @@ sortHogs = () => {
   })
 }
 
+handleGreasedFilter = () => {
+  console.log('hey')
+  this.setState({
+    greased: !this.state.greased,
+  }, () => this.sortHogs())
+}
 
 
 handleFilter = (e) => {
@@ -107,7 +88,7 @@ handleFilter = (e) => {
           handleGreasedFilter={this.handleGreasedFilter}
           handleFilter={this.handleFilter}
         />
-      <HogsBrowser hogs={this.state.filteredHogs} />
+      <HogsBrowser hogs={this.state.filteredHogs.length ? this.state.filteredHogs: this.state.hogs} />
       </div>
     )
   }
