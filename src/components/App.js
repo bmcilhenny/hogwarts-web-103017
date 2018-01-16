@@ -4,7 +4,10 @@ import Nav from './Nav'
 import hogs from '../porkers_data';
 import HogsBrowser from './HogsBrowser';
 import Filter from './Filter'
-
+import { Route} from 'react-router-dom'
+import { Navbar } from './Navbar'
+import Home from  './Home'
+import Login from './Login'
 
 class App extends Component {
   constructor() {
@@ -14,9 +17,12 @@ class App extends Component {
     hogs: hogs,
     greased: false,
     filter: 'All',
-    filteredHogs: []
+    filteredHogs: [],
+    pigGif: null
   }
 }
+
+
 
 sortHogsByWeight = () => {
   const sortedByWeight = [...this.state.hogs];
@@ -78,17 +84,31 @@ handleFilter = (e) => {
 }
 
   render() {
-    // console.log(this.state.hogs)
     const {hogs, greased} = this.state;
     return (
       <div className="App">
         < Nav />
-        < Filter
-          greased={greased}
-          handleGreasedFilter={this.handleGreasedFilter}
-          handleFilter={this.handleFilter}
+        < Navbar />
+        < Route exact path="/" render={ () => <Home pigGif={this.state.pigGif}/>} />
+        < Route exact path="/login" render= {() => <Login /> } />
+        < Route exact path="/hogs" render={() => {
+          return (
+            <div>
+              <Filter
+                greased={greased}
+                handleGreasedFilter={this.handleGreasedFilter}
+                handleFilter={this.handleFilter}
+              />
+              <br></br>
+                <HogsBrowser hogs={this.state.filteredHogs.length ? this.state.filteredHogs: this.state.hogs}
+                />
+          </div>
+          )}
+        }
         />
-      <HogsBrowser hogs={this.state.filteredHogs.length ? this.state.filteredHogs: this.state.hogs} />
+
+        <br></br>
+
       </div>
     )
   }

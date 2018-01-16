@@ -26,26 +26,37 @@ handleClick = () => {
   }
 }
 
+
 const HogCard = (props) => {
-  // const imagePath = `../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`;
-  // console.log(typeof imagePath)
-  // console.log(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)
   return (
-    <div onClick={props.handleClick}>
-      <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
-      <h3>{props.hog.name}</h3>
+    <div className="ui card">
+      <div className="image">
+        <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
+      </div>
+      <div className="content">
+        <a className="header" onClick={props.handleClick}>{props.hog.name}</a>
+      </div>
     </div>
   )
 }
 
 const ShowHogCard = (props) => {
-  // const imagePath = `../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`;
   return (
-    <div onClick={props.handleClick} >
-      <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
-      <h3>{props.hog.name}</h3>
-      <h4>{props.hog.specialty}</h4>
-      <h4>{props.hog.greased ? "Greased" : "Ungreased"}</h4>
+    <div className="ui card">
+      <div className="image">
+        <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
+      </div>
+      <div className="content">
+        <a className="header" onClick={props.handleClick}>{props.hog.name}</a>
+      </div>
+      <div className="description">
+        <label>Specialty</label>
+        <br></br>
+        {props.hog.specialty}
+      </div>
+      <div className="extra content">
+        <p>{props.hog.greased ? "Greased" : "Ungreased"}</p>
+      </div>
     </div>
   )
 }

@@ -7,7 +7,7 @@ const HogsBrowser = ({hogs}) => {
   )
 
   return (
-    <div>{allHogs}</div>
+    <div className="ui grid container">{allHogs}</div>
   )
 }
 

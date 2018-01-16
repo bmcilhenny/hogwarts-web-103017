@@ -8,7 +8,6 @@ const Filter = (props) => {
         <option value="Name">Name</option>
         <option value="Weight">Weight</option>
       </select>
-
       <label>Greased</label>
       <input type="checkbox" value={props.greased} onChange={props.handleGreasedFilter}/>
     </div>
